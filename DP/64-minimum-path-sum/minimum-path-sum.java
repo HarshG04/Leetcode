@@ -16,15 +16,18 @@ class Solution {
         return dp[i][j] = Math.min(down,right)+grid[i][j];
     }
     public int minPathBU(int[][] grid){
-        int[][] dp = new int[grid.length+1][grid[0].length+1];
-        for(int[] a:dp) Arrays.fill(a,Integer.MAX_VALUE);
-        dp[1][1] = grid[0][0];
-        for(int i=1;i<dp.length;i++){
-            for(int j=1;j<dp[0].length;j++){
-                if(i==1 && j==1) continue;
-                dp[i][j] = Math.min(dp[i-1][j],dp[i][j-1])+grid[i-1][j-1];   
+        for (int i = 1; i < grid[0].length; i++) {
+            grid[0][i] += grid[0][i-1];
+        }
+        for (int i = 1; i<grid.length; i++) {
+            grid[i][0] += grid[i-1][0];
+        }
+        
+        for(int i=1;i<grid.length;i++){
+            for(int j=1;j<grid[0].length;j++){
+                grid[i][j] += Math.min(grid[i-1][j],grid[i][j-1]);
             }
         }
-        return dp[dp.length-1][dp[0].length-1];
+        return grid[grid.length-1][grid[0].length-1];
     }
 }
