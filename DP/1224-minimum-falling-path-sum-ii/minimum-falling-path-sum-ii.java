@@ -10,7 +10,6 @@ class Solution {
         
     }
     public int minfallTD(int[][] arr,int i,int j,int[][]dp){
-        if(j>=arr[0].length || j<0) return Integer.MAX_VALUE;
         if(i==arr.length-1) return arr[i][j];
         if(dp[i][j]>-100000) return dp[i][j];
         int ans = Integer.MAX_VALUE;
