@@ -5,15 +5,27 @@ class Solution {
     }
     public int lis(int[] nums){
         int n = nums.length;
-        int[] dp = new int[n];
-        Arrays.fill(dp,1);
-        int max = Integer.MIN_VALUE;
-        for(int i=0;i<n;i++){
-            for(int j=i-1;j>=0;j--){
-                if(nums[i]>nums[j]) dp[i] = Math.max(dp[i],dp[j]+1);
-                max = Math.max(max,dp[i]);
-            }
+        ArrayList<Integer> ll = new ArrayList<>();
+        ll.add(nums[0]);
+        for(int i=1;i<n;i++){
+            if(nums[i]>ll.get(ll.size()-1)) ll.add(nums[i]);
+            else ll.set(right(ll,nums[i]),nums[i]);
+            // System.out.println(ll);
         }
-        return max;
+        return ll.size();
+    }
+    public static int right(ArrayList<Integer> ll,int val){
+        int i=0,j=ll.size()-1;
+        while(i<j){
+            int mid = (i+j)/2;
+            if(ll.get(mid)==val){
+                // System.out.println(val+" "+mid);
+                return mid;
+            }
+            else if(ll.get(mid)>val) j = mid;
+            else i=mid+1;
+        }
+        // System.out.println(val+". "+i);
+        return i;
     }
 }
