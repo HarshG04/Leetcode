@@ -3,14 +3,11 @@ class Solution {
         int max = Integer.MIN_VALUE;
         int pre = 1,suff=1;
         for(int i=0;i<nums.length;i++){
+            if(pre==0) pre=1;
+            if(suff==0) suff=1;
             pre *= nums[i];
-            max = Math.max(pre,max);
-            if(nums[i]==0) pre=1;
-        }
-        for(int i=nums.length-1;i>=0;i--){
-            suff *= nums[i];
-            max = Math.max(suff,max);
-            if(nums[i]==0) suff=1;
+            suff *= nums[nums.length-i-1];
+            max = Math.max(max,Math.max(pre,suff));
         }
         return max;
     }
