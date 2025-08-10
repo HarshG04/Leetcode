@@ -3,7 +3,6 @@ class Solution {
         HashMap<String,ArrayList<String>> map = new HashMap<>();
         for(int i=0;i<str.length;i++){
             String key = makeKey(str[i]);
-            System.out.println(key);
             if(!map.containsKey(key)) map.put(key,new ArrayList<>());
             map.get(key).add(str[i]);
         }
@@ -16,10 +15,8 @@ class Solution {
         }
         StringBuilder sb = new StringBuilder();
         for(int i=0;i<26;i++) {
-            System.out.print(freq[i]);
             sb.append(freq[i]).append('$');
         }
-        System.out.println();
         return sb.toString();
     }
 }
