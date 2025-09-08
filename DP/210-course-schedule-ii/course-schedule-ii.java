@@ -18,17 +18,21 @@ class Solution {
 
         public int[] TopologicalSort(){
             PriorityQueue<Integer> pq = new PriorityQueue<>();
-            ArrayList<Integer> ans = new ArrayList<>();
+            
             int[] in = indegree();
             for(int i=0;i<in.length;i++){
                 if(in[i]==0) pq.add(i);
             }
             
+            int[] ans = new int[map.size()];
+            int idx =  0;
+            int count = 0;
             while(!pq.isEmpty()){
                 //remove
                 int rv = pq.poll();
 
-                ans.add(rv);
+                ans[idx++]=rv;
+                count++;
 
                 // reduce indegree and add nbrs
                 for(int nbr : map.get(rv)) {
@@ -37,26 +41,19 @@ class Solution {
                 }
             }
 
-            if (ans.size() == map.size()) {
-                int[] result = new int[ans.size()];
-                for (int i = 0; i < ans.size(); i++) {
-                    result[i] = ans.get(i); // unboxing Integer to int
-                }
-            return result;
-            } else {
-                return new int[0];
-            }
+            if(count!=map.size()) return new int[0];
+            return ans;
             
         }
         public int[] indegree(){
-                int[] in = new int[map.size()];
+            int[] in = new int[map.size()];
 
-                for(int key : map.keySet()){
-                    for(int nbr : map.get(key)) in[nbr]++;
-                }
-
-                return in;
+            for(int key : map.keySet()){
+                for(int nbr : map.get(key)) in[nbr]++;
             }
+
+            return in;
+        }
 
     }
 }
