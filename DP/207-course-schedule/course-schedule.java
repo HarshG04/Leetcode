@@ -2,7 +2,7 @@ class Solution {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
         Topological_Sort ts = new Topological_Sort(numCourses);
         for(int i=0;i<prerequisites.length;i++){
-            ts.AddEdge(prerequisites[i][0],prerequisites[i][1]);
+            ts.AddEdge(prerequisites[i][1],prerequisites[i][0]);
         }
 
         return ts.TopologicalSort();
